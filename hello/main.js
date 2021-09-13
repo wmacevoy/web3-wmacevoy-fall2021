@@ -5,6 +5,11 @@ const port = 3000
 let ctr = 0
 
 app.use(express.json());
+app.use((req, res, next) => {
+  // res.setHeader('Content-Security-Policy', "style-src 'unsafe-inline'"); // INSECURE
+  res.setHeader('Access-Control-Allow-Origin',"*");
+  next();
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
