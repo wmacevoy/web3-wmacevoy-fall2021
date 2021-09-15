@@ -5,8 +5,11 @@
         let y=document.getElementById('y').value;
         let request = new XMLHttpRequest();
         request.onreadystatechange = () => {
-            if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
+            console.log(`ready state change: ${request.readyState} ${request.status}`)
+            if (request.readyState == 4 && request.status == 200) {
+                let obj = JSON.parse(request.responseText);
+                console.log("response: " + JSON.stringify(obj));
+                document.getElementById('z').value = obj.z;
             }
         }
         request.open("GET",`http://localhost:3000/add?x=${x}&y=${y}`,true);
