@@ -37,6 +37,21 @@ app.route('/testdb')
 	});
 });
 
+async function getKittens(req,res) {
+  mongoose.connect('mongodb://localhost:27017/test');
+  try {
+    const results = await Kitten.find({});
+    console.log(results);
+    res.json(results);
+  } catch (err) {
+    throw err;
+  }
+}
+app.route('/kittens')
+.get((req,res) => {
+  getKittens(req,res)
+  .then(()=>{ console.log("kittens gotten!"); })
+});
 
 app.route('/add/:x/:y')
    .get((req, res) => {
