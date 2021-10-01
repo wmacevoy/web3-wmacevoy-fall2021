@@ -10,7 +10,7 @@
             }
         }
         request.ontimeout = err;
-        request.open("GET",`http://localhost:3000/add?x=${x}&y=${y}`,true);
+        request.open("GET",`http://localhost:3000/add/${x}/${y}`,true);
         request.send();
         console.log(`add(${x},${y}) requested.`);
     }

@@ -37,6 +37,17 @@ app.route('/testdb')
 	});
 });
 
+app.route('/kitten/:name')
+.post((req,res) => {
+    mongoose.connect('mongodb://localhost:27017/test');
+    const kitten = new Kitten({ name: req.params['name'] });
+    kitten.save()
+	.then((result)=>{
+	    console.log('saved.');
+	    res.send('saved.');
+	});
+});
+
 async function getKittens(req,res) {
   mongoose.connect('mongodb://localhost:27017/test');
   try {
@@ -55,11 +66,10 @@ app.route('/kittens')
 
 app.route('/add/:x/:y')
    .get((req, res) => {
-  ctr += 1;
   let x = JSON.parse(req.params['x']);
   let y = JSON.parse(req.params['y']);
   let z = Number(x) + Number(y);
-  let obj = { 'ctr' : ctr , 'x': x, 'y': y, 'z': z};
+  let obj = { 'x': x, 'y': y, 'z': z};
   console.log("/add: " + JSON.stringify(obj));
   res.json(obj);
 })
