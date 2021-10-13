@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/ping', (req, res) => {
+  console.log('ping from ' + req.socket.remoteAddress)
+  res.send('pong: query=' + JSON.stringify(req.query))
+})
 app.get('/bye', (req, res) => {
   res.send('Bye for now!')
 })
