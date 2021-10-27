@@ -36,8 +36,9 @@ def post_kitty():
     mydb=connect()
     data = request.json
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute(f"INSERT name,color INTO kitten VALUES (%(name)s,%(color)s)",
+    mycursor.execute(f"INSERT INTO kitten(name,color) VALUES (%(name)s,%(color)s)",
         {'name': data['name'], 'color': data['color']})
+    mydb.commit()
     id=mycursor.lastrowid
     return jsonify({'id':id})
 
